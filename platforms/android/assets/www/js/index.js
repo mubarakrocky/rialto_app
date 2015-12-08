@@ -17,9 +17,14 @@
  * under the License.
  */
 var app = {
+    
+    baseUrl: "http://54.169.99.55",
+    
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        var orders = new Orders();
+		orders.initialize();
     },
     // Bind Event Listeners
     //
@@ -27,6 +32,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        $("#navbar a").click(this.clickedMenu);
     },
     // deviceready Event Handler
     //
@@ -34,37 +40,62 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        alert("Device ready");
+        var phoneName = device.model;
+        alert(phoneName);
+        var uuid = device.uuid;
+        alert(uuid);
+        
+        
+        var push = PushNotification.init({
+		    android: {
+		        senderID: "qburst.com:api-project-236226647252"
+		    },
+		    ios: {},
+		    windows: {}
+		});
+		
+		push.on('registration', function(data) {
+		    alert("@registration");
+		});
+		
+		push.on('notification', function(data) {
+		    // data.message,
+		    // data.title,
+		    // data.count,
+		    // data.sound,
+		    // data.image,
+		    // data.additionalData
+		    alert("@notification");
+		});
+		
+		push.on('error', function(e) {
+		    // e.message
+		    alert(e.message);
+		});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-        var onSuccess = function(position) {
-            alert('Latitude: '          + position.coords.latitude          + '\n' +
-                'Longitude: '         + position.coords.longitude         + '\n' +
-                'Altitude: '          + position.coords.altitude          + '\n' +
-                'Accuracy: '          + position.coords.accuracy          + '\n' +
-                'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-                'Heading: '           + position.coords.heading           + '\n' +
-                'Speed: '             + position.coords.speed             + '\n' +
-                'Timestamp: '         + position.timestamp                + '\n');
-        };
-
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n');
-        }
-        var options = { enableHighAccuracy: true };
-        navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+        app.hideIndicator();
+    },
+    
+    clickedMenu: function(event) {
+    	var clickedUrl = $(event.delegateTarget).attr("href");
+    	var clickedClass = clickedUrl.substring(1);
+    	if(clickedClass == "orders") {
+    		var orders = new Orders();
+    		orders.initialize();
+    	};
+    },
+    
+    hideIndicator: function() {
+        $("#loading").hide();
+    },
+    
+    showIndicator: function() {
+        $("#loading").show();
     }
 };
 
 app.initialize();
+

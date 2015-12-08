@@ -18,7 +18,7 @@
  */
 var app = {
     
-    baseUrl: "http://localhost:3000",
+    baseUrl: "http://54.169.99.55",
     
     // Application Constructor
     initialize: function() {
@@ -40,6 +40,39 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        alert("Device ready");
+        var phoneName = device.model;
+        alert(phoneName);
+        var uuid = device.uuid;
+        alert(uuid);
+        
+        
+        var push = PushNotification.init({
+		    android: {
+		        senderID: "236226647252"
+		    },
+		    ios: {},
+		    windows: {}
+		});
+		
+		push.on('registration', function(data) {
+		    alert("@registration");
+		});
+		
+		push.on('notification', function(data) {
+		    // data.message,
+		    // data.title,
+		    // data.count,
+		    // data.sound,
+		    // data.image,
+		    // data.additionalData
+		    alert("@notification");
+		});
+		
+		push.on('error', function(e) {
+		    // e.message
+		    alert(e.message);
+		});
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -65,3 +98,4 @@ var app = {
 };
 
 app.initialize();
+

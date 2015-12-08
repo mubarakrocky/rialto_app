@@ -9,14 +9,24 @@
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
     </feature>
-    <splash density="land-hdpi" src="platforms/android/res/drawable-hdpi/hdpi.png" />
-    <splash density="land-ldpi" src="platforms/android/res/drawable-ldpi/ldpi.png" />
-    <splash density="land-mdpi" src="platforms/android/res/drawable-mdpi/mdpi.png" />
-    <splash density="land-xhdpi" src="platforms/android/res/drawable-xhdpi/xhdpi.png" />
-    <splash density="port-hdpi" src="platforms/android/res/drawable-hdpi/hdpi.png" />
-    <splash density="port-ldpi" src="platforms/android/res/drawable-ldpi/ldpi.png" />
-    <splash density="port-mdpi" src="platforms/android/res/drawable-mdpi/mdpi.png" />
-    <splash density="port-xhdpi" src="platforms/android/res/drawable-xhdpi/xhdpi.png" />
+    <feature name="PushNotification">
+        <param name="android-package" value="com.adobe.phonegap.push.PushPlugin" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <icon density="ldpi" src="platforms/android/res/mipmap-mdpi/icon.png" />
+    <icon density="mdpi" src="platforms/android/res/mipmap-mdpi/icon.png" />
+    <icon density="hdpi" src="platforms/android/res/mipmap-hdpi/icon.png" />
+    <icon density="xhdpi" src="platforms/android/res/mipmap-xhdpi/icon.png" />
+    <splash density="land-hdpi" src="platforms/android/res/drawable/screen_land.png" />
+    <splash density="land-ldpi" src="platforms/android/res/drawable/screen_land.png" />
+    <splash density="land-mdpi" src="platforms/android/res/drawable/screen_land.png" />
+    <splash density="land-xhdpi" src="platforms/android/res/drawable/screen_land.png" />
+    <splash density="port-hdpi" src="platforms/android/res/drawable/screen.png" />
+    <splash density="port-ldpi" src="platforms/android/res/drawable/screen.png" />
+    <splash density="port-mdpi" src="platforms/android/res/drawable/screen.png" />
+    <splash density="port-xhdpi" src="platforms/android/res/drawable/screen.png" />
     <name>Fishcart Logistics</name>
     <description>
         Fishcart logistics utility app
