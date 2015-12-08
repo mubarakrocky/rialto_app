@@ -18,11 +18,13 @@
  */
 var app = {
     
-    baseUrl: "http://localhost:3002",
+    baseUrl: "http://localhost:3000",
     
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        var orders = new Orders();
+		orders.initialize();
     },
     // Bind Event Listeners
     //
@@ -30,6 +32,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        $("#navbar a").click(this.clickedMenu);
     },
     // deviceready Event Handler
     //
@@ -40,7 +43,16 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        
+        app.hideIndicator();
+    },
+    
+    clickedMenu: function(event) {
+    	var clickedUrl = $(event.delegateTarget).attr("href");
+    	var clickedClass = clickedUrl.substring(1);
+    	if(clickedClass == "orders") {
+    		var orders = new Orders();
+    		orders.initialize();
+    	};
     },
     
     hideIndicator: function() {
